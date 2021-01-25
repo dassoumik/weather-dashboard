@@ -1,36 +1,120 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="../assets/style.css">
-    </head>
-    <body>
-        <div class="container">
-            <aside class="float-left">
-                
-                <form class="form-inline">
-                    <div class="form-group m0-sm-3 mb-2">
-                      <label for="searchBox" class="inline-block">Search for a City: </label>
-                      <input type="text" class="form-control pr-0" id="searchBox" placeholder="city name">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="./assets/style.css"> -->
+</head>
+
+<body>
+    <header class="bg-secondary text-center display-4 font-weight-bold p-2 text-white">Weather DashBoard</header>
+    <div class="container mx-auto">
+        <aside class="float-left bg-light ml-0 mt-3 pl-0 mr-4">
+            <form role="search" method="get" class="search-form">
+                <label>
+                    <div class="screen-reader-text">Search for City:</div>
+                    <input type="search" class="search-field" placeholder="city name" value="" name="s"
+                        title="Search for:"
+                        style="border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-right-width: 0;" /><button type="submit"
+                        class="search-submit bg-primary btn-md ml-0 pb-1 pt-1" value=""
+                        style="border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-width: 0;"><i
+                            class="icon-search text-white"></i></button>
+                </label>
+            </form>
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+
+                </ul>
+            </div>
+        </aside>
+        <div class="row wrapper height-50 mt-3">
+
+            <section class="card mt-3" stlye="max-width: 100rem">
+                <div class="card-body col-md-12 d-block font-weight-bold" style="width: 70rem">
+                    <span class="city-name display-4"></span>
+                    <span><img class="weather-icon invisible display-4 img-thumbnail no-border mt-0 pt-0 position-r"
+                            src="" alt="weather icon" /></span>
+                </div>
+                <div class="temperature col-md-12 mt-0 mb-3">
+                    <h4 class="d-inline">Temperature: </h4><small><span class="temp-data font-weight-bold"></span>
+                        &#8457</small>
+                </div>
+                <div class="humidity col-md-12 mb-3">
+                    <h4 class="d-inline">Humidity: </h4><small><span class="humid-data font-weight-bold"></span>
+                        %</small>
+                </div>
+                <div class="wind-speed col-md-12 mb-3">
+                    <h4 class="d-inline">Wind Speed: </h4><small><span class="wind-data font-weight-bold"></span>
+                        MPH</small>
+                </div>
+                <div class="UV-index col-md-12 mb-3">
+                    <h4 class="d-inline">UV Index: </h4><small><span class="uv-data font-weight-bold"></span></small>
+                </div>
+            </section>
+            <section class="bg-light rounded-lg col-md-12 height-20 mt-2">
+                <div class="text-style"><strong><h4>5 Day Forecast:</h4></strong></div>
+                <div class="card-group pl-0 pr-0">
+                    <div class="card text-white bg-primary rounded-lg m-1 mb-3" style="max-width: 10rem;">
+                        <div class="card-header"></div>
+                        <div class="card-body pr-0">
+                            <img class="card-img mr-5 pr-5" src="" alt="conditions" />
+                            <p class="card-text">Temp: <span class="card-temp"></span> &#8457</p>
+                            <p class="card-text">Humidity: <span class="card-humid"></span>%</p>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary pb-2 mb-2"><i class="icon-search"></i></button>
-                  </form>
-            </aside>
+
+                    <div class="card text-white bg-primary rounded-lg m-1 mb-3" style="max-width: 10rem;">
+                        <div class="card-header"></div>
+                        <div class="card-body pr-0">
+                            <img class="card-img mr-5 pr-5" src="" alt="conditions" />
+                            <p class="card-text">Temp: <span class="card-temp"></span> &#8457</p>
+                            <p class="card-text">Humidity: <span class="card-humid"></span>%</p>
+                        </div>
+                    </div>
+                    <div class="card text-white bg-primary rounded-lg m-1 mb-3" style="max-width: 10rem;">
+                        <div class="card-header"></div>
+                        <div class="card-body pr-0">
+                            <img class="card-img mr-5 pr-5" src="" alt="conditions" />
+                            <p class="card-text">Temp: <span class="card-temp"></span> &#8457</p>
+                            <p class="card-text">Humidity: <span class="card-humid"></span>%</p>
+                        </div>
+                    </div>
+                    <div class="card text-white bg-primary rounded-lg m-1 mb-3" style="max-width: 10rem;">
+                        <div class="card-header"></div>
+                        <div class="card-body pr-0">
+                            <img class="card-img mr-5 pr-5" src="" alt="conditions" />
+                            <p class="card-text">Temp: <span class="card-temp"></span> &#8457</p>
+                            <p class="card-text">Humidity: <span class="card-humid"></span>%</p>
+                        </div>
+                    </div>
+                    <div class="card text-white bg-primary rounded-lg m-1 mb-3" style="max-width: 10rem;">
+                        <div class="card-header"></div>
+                        <div class="card-body pr-0">
+                            <img class="card-img mr-5 pr-5" src="" alt="conditions" />
+                            <p class="card-text">Temp: <span class="card-temp"></span> &#8457</p>
+                            <p class="card-text">Humidity: <span class="card-humid"></span>%</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-        
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="../assets/luxon.js"></script>
-        <script src="script.js"></script>
-    </body>
+    </div>
+
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./assets/luxon.js"></script>
+    <script src="develop/script.js"></script>
+</body>
+
 </html>
