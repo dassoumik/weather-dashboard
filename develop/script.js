@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    var responseReceived = false;
+    var searchFieldValue;
+    var historyClicked = false;
     var apikey = "d148acf561309eb9900a78ae19d271bb";
     var cityHistory = ["atlanta"];
     $(".list-group-flush").empty();
@@ -12,8 +15,12 @@ $(document).ready(function () {
 
     function startSearch(e) {
         e.preventDefault();
-        if (searchCityEntered) {
+        
+       if (searchCityEntered || historyClicked) {
             cityName = $(".search-field").val().trim();
+            if (historyClicked) {
+                cityName = searchFieldValue;
+            }    
             cityHistory.forEach((item, index) => {
                 if (item == cityName) {
                     cityHistory.splice(index, 1);
@@ -34,8 +41,10 @@ $(document).ready(function () {
             if (i > cityHistory.length) {
                 break;
             }
-            var newItem = $("<li>").addClass("list-group-item text-capitalize").text(cityHistory[i]);
+            var newItem = $("<li>").addClass("list-group-item");
             newItem.appendTo(".list-group");
+            var newButton = $("<button>").addClass("btn text-capitalize").text(cityHistory[i]);
+            newButton.appendTo(newItem);
         }
         localStorage.setItem("cityHistLS", JSON.stringify(cityHistory));
         var URLname = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + ",US&units=imperial&appid=" + apikey;
@@ -52,7 +61,9 @@ $(document).ready(function () {
             $(".weather-icon").attr("class", "visible");
             setUVindex(res.coord.lon, res.coord.lat);
         })
+        historyClicked = false;
     }
+    
 
     function setUVindex(lon, lat) {
         $.ajax({
@@ -82,6 +93,7 @@ $(document).ready(function () {
                 cardIcon = res.daily[i].weather[0].icon;
                 $(cardImage).attr("src", "http://openweathermap.org/img/wn/" + res.daily[i].weather[0].icon + ".png");
             }
+            responseReceived = true;
         })
         return;
     }
@@ -91,5 +103,15 @@ $(document).ready(function () {
 
     $(".search-field").on("change", function () {
         searchCityEntered = true;
+    
     });
+
+
+    $(document).on("click", ".list-group-item", function() {
+    console.log("hello world!");
+    searchFieldValue = (($(this, ".list-group-item-button").text()));
+    historyClicked = true;
+    $(".search-field").val(searchFieldValue);
+    document.querySelector(".search-submit").click();
+})
 });
