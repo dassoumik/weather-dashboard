@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var responseReceived = false;
+    var cityName;
     var searchFieldValue;
     var historyClicked = false;
     var apikey = "d148acf561309eb9900a78ae19d271bb";
@@ -88,14 +88,21 @@ $(document).ready(function () {
                 date = DateTime.fromSeconds(res.daily[i].dt).toLocal();
                 dateLocal = DateTime.fromObject(date.c).toFormat("f").split(",")[0];
                 cardDate.text(dateLocal);
-                $(cardTemp[i - 1]).text(Math.floor(res.daily[i].temp.day));
-                $(cardHumid[i - 1]).text(Math.floor(res.daily[i].humidity));
+                $(cardTemp[i - 1]).text(Math.round(res.daily[i].temp.day));
+                $(cardHumid[i - 1]).text(Math.round(res.daily[i].humidity));
                 cardIcon = res.daily[i].weather[0].icon;
                 $(cardImage).attr("src", "http://openweathermap.org/img/wn/" + res.daily[i].weather[0].icon + ".png");
             }
-            responseReceived = true;
+            $(".search-field").val("");
         })
         return;
+    }
+   
+    function pullHistoryItemClicked() {
+        searchFieldValue = (($(this, ".list-group-item-button").text()));
+        historyClicked = true;
+        $(".search-field").val(searchFieldValue);
+        document.querySelector(".search-submit").click();
     }
 
     $(window).on("load", startSearch);
@@ -107,11 +114,6 @@ $(document).ready(function () {
     });
 
 
-    $(document).on("click", ".list-group-item", function() {
-    console.log("hello world!");
-    searchFieldValue = (($(this, ".list-group-item-button").text()));
-    historyClicked = true;
-    $(".search-field").val(searchFieldValue);
-    document.querySelector(".search-submit").click();
-})
+    $(document).on("click", ".list-group-item", pullHistoryItemClicked);
+
 });
