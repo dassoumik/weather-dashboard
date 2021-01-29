@@ -67,7 +67,7 @@ $(document).ready(function () {
 
     function setUVindex(lon, lat) {
         $.ajax({
-            url: "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,minutely&appid=" + apikey,
+            url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,minutely&appid=" + apikey,
             method: "GET"
         }).done(function (res) {
             DateTime = luxon.DateTime;
