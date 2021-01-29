@@ -15,12 +15,12 @@ $(document).ready(function () {
 
     function startSearch(e) {
         e.preventDefault();
-        
-       if (searchCityEntered || historyClicked) {
+
+        if (searchCityEntered || historyClicked) {
             cityName = $(".search-field").val().trim();
             if (historyClicked) {
                 cityName = searchFieldValue;
-            }    
+            }
             cityHistory.forEach((item, index) => {
                 if (item == cityName) {
                     cityHistory.splice(index, 1);
@@ -37,8 +37,8 @@ $(document).ready(function () {
 
         $(".list-group-flush").empty();
 
-        for (let i = 0; i < 4; i++) {
-            if (i > cityHistory.length) {
+        for (let i = 0; i < 8; i++) {
+            if ((i > cityHistory.length) || (cityHistory[i] == null)) {
                 break;
             }
             var newItem = $("<li>").addClass("list-group-item");
@@ -63,11 +63,11 @@ $(document).ready(function () {
         })
         historyClicked = false;
     }
-    
+
 
     function setUVindex(lon, lat) {
         $.ajax({
-            url: "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,minutely,alert&appid=" + apikey,
+            url: "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,minutely&appid=" + apikey,
             method: "GET"
         }).done(function (res) {
             DateTime = luxon.DateTime;
@@ -97,7 +97,7 @@ $(document).ready(function () {
         })
         return;
     }
-   
+
     function pullHistoryItemClicked() {
         searchFieldValue = (($(this, ".list-group-item-button").text()));
         historyClicked = true;
@@ -105,15 +105,15 @@ $(document).ready(function () {
         document.querySelector(".search-submit").click();
     }
 
-    $(window).on("load", startSearch);
+
     $(".search-submit").on("click", startSearch);
 
     $(".search-field").on("change", function () {
         searchCityEntered = true;
-    
+
     });
 
-
+    window.onload = document.querySelector(".search-submit").click();
     $(document).on("click", ".list-group-item", pullHistoryItemClicked);
 
 });
